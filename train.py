@@ -1,10 +1,4 @@
 # -*- coding:utf-8 -*-
-# -----------------------------------------
-#   Filename: train.py
-#   Author  : Qing Wu
-#   Email   : wuqing@shanghaitech.edu.cn
-#   Date    : 2021/9/19
-# -----------------------------------------
 import os
 import data
 import torch
@@ -22,8 +16,8 @@ import random
 # import tensorflow as tf
 import numpy as np
 from model.layers import PositionalEncoding
-from DegAEsino.networks import Restormer_Backbonesino
-from DegAEfft.networks import RestormerBackbonefft
+from SDVFM.networks import Restormer_Backbonesino
+from FDVFM.networks import RestormerBackbonefft
 
 # # 设置随机种子
 # seed = 42
@@ -163,12 +157,12 @@ if __name__ == '__main__':
                       decoder_width=decoder_width).to(DEVICE)
 
     SVFM = Restormer_Backbonesino().to(DEVICE)
-    save_path = './DegAEsino/save-sino/'
+    save_path = 'SDVFM/save-sino/'
     f = os.path.join(save_path, 'model_{}iter.ckpt'.format(100))
     SVFM.load_state_dict(torch.load(f))
 
     FVFM = RestormerBackbonefft().to(DEVICE)
-    save_path = './DegAEfft/save-fft'
+    save_path = 'FDVFM/save-fft'
     f = os.path.join(save_path, 'model_{}iter.ckpt'.format(100))
     FVFM.load_state_dict(torch.load(f))
 

@@ -8,8 +8,8 @@ from model.network  import Network
 import utils
 from model.layers import PositionalEncoding
 from thop import profile, clever_format
-from DegAEsino.networks import Restormer_Backbonesino
-from DegAEfft.networks import RestormerBackbonefft
+from SDVFM.networks import Restormer_Backbonesino
+from FDVFM.networks import RestormerBackbonefft
 
 
 def calcGPUTime():
@@ -25,12 +25,12 @@ def calcGPUTime():
     # target_img = torch.randn(1, 1000, 912).to(device).view(1, -1).unsqueeze(-1)
     xy_input = utils.make_coord([100, 912], flatten=True)
     SVFM = Restormer_Backbonesino().to(device)
-    save_path = './DegAEsino/save-sino/'
+    save_path = 'SDVFM/save-sino/'
     f = os.path.join(save_path, 'model_{}iter.ckpt'.format(100))
     SVFM.load_state_dict(torch.load(f))
 
     FVFM = RestormerBackbonefft().to(device)
-    save_path = './DegAEfft/save-fft'
+    save_path = 'FDVFM/save-fft'
     f = os.path.join(save_path, 'model_{}iter.ckpt'.format(100))
     FVFM.load_state_dict(torch.load(f))
     with torch.no_grad():
